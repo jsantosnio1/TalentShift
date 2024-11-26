@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .add-employee-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            text-align: center;
+        }
+		.actions-column {
+		   text-align: center; 
+		}
+		.btn-container {
+		    display: flex;
+		    justify-content: center;
+		    gap: 10px; 
+		}
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Employee List</h1>
+        <div th:if="${#lists.isEmpty(employees)}">
+            <div class="alert alert-warning" role="alert">
+                No employees found.
+            </div>
+        </div>
+        
+        <div th:unless="${#lists.isEmpty(employees)}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Hire Date</th>
+                        <th scope="col">Status</th>
+						<th scope="col" class="actions-column">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.firstName}"></td>
+                        <td th:text="${employee.lastName}"></td>
+                        <td th:text="${employee.positionTitle}"></td>
+                        <td th:text="${employee.hireDate}"></td>
+                        <td th:text="${employee.status}"></td>
+						<td class="btn-container">
+						<a th:href="@{/employee/view/{id}(id=${employee.id})}" class="btn btn-info">View Details</a>
+						<a th:href="@{/employee/edit/{id}(id=${employee.id})}" class="btn btn-warning">Edit</a>
+						</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="add-employee-btn">
+            <a href="/employee/add" class="btn btn-primary">Add Employee</a>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

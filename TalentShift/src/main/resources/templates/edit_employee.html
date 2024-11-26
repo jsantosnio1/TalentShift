@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Employee</h2>
+        <form th:action="@{/employee/update/{id}(id=${employee.id})}" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" th:value="${employee.firstName}">
+            </div>
+            <div class="form-group">
+                <label for="middleName">Middle Name</label>
+                <input type="text" class="form-control" id="middleName" name="middleName" th:value="${employee.middleName}">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" th:value="${employee.lastName}">
+            </div>
+			<div class="form-group">
+			        <label for="locationCity">Location City</label>
+			        <select class="form-control" id="locationCity" name="locationCity" th:value="${employee.locationCity}">
+			            <option th:each="city : ${cities}" 
+			                    th:value="${city}" 
+			                    th:text="${city}" 
+			                    th:selected="${city == employee.locationCity}"></option>
+			        </select>
+			</div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" th:value="${employee.address}">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Birth Date</label>
+                <input type="date" class="form-control" id="birthDate" name="birthDate" th:value="${employee.birthDate}">
+            </div>
+            <div class="form-group">
+                <label for="telephone">Telephone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" th:value="${employee.telephone}">
+            </div>
+            <div class="form-group">
+                <label for="positionTitle">Position Title</label>
+                <input type="text" class="form-control" id="positionTitle" name="positionTitle" th:value="${employee.positionTitle}">
+            </div>
+            <div class="form-group">
+                <label for="hireDate">Hire Date</label>
+                <input type="date" class="form-control" id="hireDate" name="hireDate" th:value="${employee.hireDate}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:value="${employee.email}">
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="number" class="form-control" id="salary" name="salary" th:value="${employee.salary}">
+            </div>
+            <div class="form-group">
+                <label for="timeInPosition">Time in Position (Months)</label>
+                <input type="number" class="form-control" id="timeInPosition" name="timeInPosition" th:value="${employee.timeInPosition}">
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status">
+                    <option value="ACTIVE" th:selected="${employee.status == 'ACTIVE'}">Active</option>
+                    <option value="INACTIVE" th:selected="${employee.status == 'INACTIVE'}">Inactive</option>
+                    <option value="ON_LEAVE" th:selected="${employee.status == 'ON_LEAVE'}">On Leave</option>
+                    <option value="TERMINATED" th:selected="${employee.status == 'TERMINATED'}">Terminated</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Employee</button>
+            <a href="/employees" class="btn btn-secondary ml-2">Back to Employee List</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
